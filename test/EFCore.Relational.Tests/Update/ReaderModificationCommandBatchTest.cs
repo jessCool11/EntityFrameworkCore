@@ -340,7 +340,7 @@ namespace Microsoft.EntityFrameworkCore.Update
                             property,
                             property.TestProvider(),
                             parameterNameGenerator.GenerateNext,
-                            false, true, false, false, false)
+                            false, true, false, false, false, true)
                     }));
 
             batch.AddCommand(
@@ -356,7 +356,7 @@ namespace Microsoft.EntityFrameworkCore.Update
                             property,
                             property.TestProvider(),
                             parameterNameGenerator.GenerateNext,
-                            false, true, false, false, false)
+                            false, true, false, false, false, true)
                     }));
 
             var storeCommand = batch.CreateStoreCommandBase();
@@ -392,7 +392,7 @@ namespace Microsoft.EntityFrameworkCore.Update
                             property,
                             property.TestProvider(),
                             parameterNameGenerator.GenerateNext,
-                            false, true, false, false, false)
+                            false, true, false, false, false, true)
                     }));
 
             var storeCommand = batch.CreateStoreCommandBase();
@@ -426,7 +426,7 @@ namespace Microsoft.EntityFrameworkCore.Update
                             property,
                             property.TestProvider(),
                             parameterNameGenerator.GenerateNext,
-                            false, false, false, true, false)
+                            false, false, false, true, false, true)
                     }));
 
             var storeCommand = batch.CreateStoreCommandBase();
@@ -460,7 +460,7 @@ namespace Microsoft.EntityFrameworkCore.Update
                             property,
                             property.TestProvider(),
                             parameterNameGenerator.GenerateNext,
-                            false, true, false, true, false)
+                            false, true, false, true, false, true)
                     }));
 
             var storeCommand = batch.CreateStoreCommandBase();
@@ -494,7 +494,7 @@ namespace Microsoft.EntityFrameworkCore.Update
                             property,
                             property.TestProvider(),
                             parameterNameGenerator.GenerateNext,
-                            true, false, false, false, false)
+                            true, false, false, false, false, true)
                     }));
 
             var storeCommand = batch.CreateStoreCommandBase();
@@ -553,11 +553,11 @@ namespace Microsoft.EntityFrameworkCore.Update
 
         private static FakeDbDataReader CreateFakeDataReader(string[] columnNames = null, IList<object[]> results = null)
         {
-            results = results ?? new List<object[]>
+            results ??= new List<object[]>
             {
                 new object[] { 1 }
             };
-            columnNames = columnNames ?? new[] { "RowsAffected" };
+            columnNames ??= new[] { "RowsAffected" };
 
             return new FakeDbDataReader(columnNames, results);
         }
@@ -610,7 +610,7 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             protected override void UpdateCachedCommandText(int commandIndex)
             {
-                CachedCommandText = CachedCommandText ?? new StringBuilder();
+                CachedCommandText ??= new StringBuilder();
                 CachedCommandText.Append(".");
             }
 
